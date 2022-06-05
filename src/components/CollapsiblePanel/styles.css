@@ -1,0 +1,10 @@
+.collapsible {
+  width: 100%;
+}
+
+.collapsible-title {
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
