@@ -1,38 +1,20 @@
 import { configureStore, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { Country, CountryCategory } from '../types';
 import thunkMiddleware from 'redux-thunk';
-
-import { getCountryExtremumCategories } from '../helpers/getCountries';
+import { Country } from '../types';
+import { getShortListCountries } from '../helpers/getCountries';
 
 export enum Status { loading, idle };
 
 export interface IState {
   status: Status
   allCountries: Country[]
-  countriesByCategories: {
-    biggest: CountryCategory
-    smallest: CountryCategory
-    custom: CountryCategory
-  }
+  custom: Country[]
 };
 
 const initialState: IState = {
   status: Status.idle,
   allCountries: [],
-  countriesByCategories: {
-    biggest: {
-      countries: [],
-      total: 0,
-    },
-    smallest: {
-      countries: [],
-      total: 0,
-    },
-    custom: {
-      countries: [],
-      total: 0,
-    },
-  }
+  custom: [],
 };
 
 
@@ -42,9 +24,14 @@ export const actionTypes = {
 
 export const getCountries = createAsyncThunk(
   actionTypes.GET_COUNTRIES,
-  async () => {
+  async (lastLetter?: string) => {
     const response = await fetch('https://raw.githubusercontent.com/samayo/country-json/master/src/country-by-population.json');
     const data = await response.json();
+
+    if (lastLetter) {
+      return getShortListCountries(data as Country[], lastLetter);
+    }
+
 
     return data as Country[];
   }
@@ -54,7 +41,10 @@ export const countriesSlice = createSlice({
   name: 'countries',
   initialState,
   reducers: {
-    setCountries: (state, { payload }) => { state.allCountries = payload }
+    setCountries: (state, { payload }) => { state.allCountries = payload },
+    addCountry: (state, { payload }) => {
+      state.custom.push(payload);
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(getCountries.pending, (state) => {
@@ -63,16 +53,13 @@ export const countriesSlice = createSlice({
     builder.addCase(getCountries.fulfilled, (state, { payload }) => {
       state.allCountries = payload
 
-      const categories = getCountryExtremumCategories(payload);
-
-      state.countriesByCategories = { ...state.countriesByCategories, ...categories}
       state.status = Status.idle
     });
   }
 })
 
 // actions
-export const { setCountries } = countriesSlice.actions
+export const { setCountries, addCountry } = countriesSlice.actions
 
 const options = {
   reducer: {

@@ -13,3 +13,15 @@
   display: flex;
   padding: 16px 20px;
 }
+
+input {
+  height: 38px;
+  padding: 0px 8px;
+  border: none;
+  border-bottom: 1px solid #aaa;
+  font-size: 16px;
+}
+
+.header {
+  padding: 16px 20px;
+}
