@@ -8,7 +8,7 @@ import { Loader } from './components/Loader';
 import { formatNumber } from './helpers/formatNumber';
 import { extremumCountries, totalPopulation } from './redux/selectors';
 
-import './App.css';
+import { styles } from './app.styles'
 import { AnyAction } from 'redux';
 
 const LAST_LETTER = 'N';
@@ -31,15 +31,15 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div>
       {status === Status.loading && <Loader />}
       {allCountries && (
         <>
-        <div className='header row'>
+        <div className={`${styles.header} ${styles.row}`}>
           <span>Total population: {formatNumber(total)}</span>
           <button onClick={getMoreHandler} disabled={allCountriesLoaded}>Get more countries</button>
         </div>
-          <div className="content">
+          <div className={styles.content}>
             <CountryColumn data={biggest} title="The 10 biggest countries"/>
             <CountryColumn data={smallest} title="The 10 smallest countries"/>
             <CountryColumn data={custom} title="Your own countries" open>

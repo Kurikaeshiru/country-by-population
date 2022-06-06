@@ -2,7 +2,7 @@ import { useState, KeyboardEvent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { addCountry } from '../../redux/store';
-import './styles.css';
+import { styles } from './newCountry.styles';
 
 export const NewCountry = () => {
   const dispatch = useDispatch();
@@ -24,10 +24,10 @@ export const NewCountry = () => {
   };
 
   return (
-    <div className='new-country'>
-      <input type="text" placeholder='Country' value={countryName} onChange={(e) => setCountryName(e.target.value)} />
-      <input type="number" placeholder='Population' value={population} onChange={(e) => setPopulation(e.target.value)} onKeyUp={keyPressHandler} />
-      <button onClick={addButtonHandler} disabled={!(countryName && population)}>+</button>
+    <div className={styles.newCountry}>
+      <input className={styles.input} type="text" placeholder='Country' value={countryName} onChange={(e) => setCountryName(e.target.value)} />
+      <input className={styles.input} type="number" placeholder='Population' value={population} onChange={(e) => setPopulation(e.target.value)} onKeyUp={keyPressHandler} />
+      <button className={styles.button} onClick={addButtonHandler} disabled={!(countryName && population)}>+</button>
     </div>
   )
 };

@@ -65,7 +65,7 @@ const options = {
   reducer: {
     country: countriesSlice.reducer,
   },
-  middleware: [thunkMiddleware],
+  middleware: (getDefaults: () => any) => getDefaults().concat(thunkMiddleware),
 }
 
 export const store = configureStore(options);
