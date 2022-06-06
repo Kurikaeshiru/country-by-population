@@ -5,6 +5,10 @@ import { getShortListCountries } from '../helpers/getCountries';
 
 export enum Status { loading, idle };
 
+const CUSTOM_COUTRIES = 'customCountries'
+
+const customCountriesData = localStorage.getItem(CUSTOM_COUTRIES)
+
 export interface IState {
   status: Status
   allCountries: Country[]
@@ -14,7 +18,7 @@ export interface IState {
 const initialState: IState = {
   status: Status.idle,
   allCountries: [],
-  custom: [],
+  custom: customCountriesData ? JSON.parse(customCountriesData) : [],
 };
 
 
@@ -43,7 +47,11 @@ export const countriesSlice = createSlice({
   reducers: {
     setCountries: (state, { payload }) => { state.allCountries = payload },
     addCountry: (state, { payload }) => {
-      state.custom.push(payload);
+      const customCountries = [...state.custom, payload]
+
+      localStorage.setItem(CUSTOM_COUTRIES, JSON.stringify(customCountries))
+
+      state.custom = customCountries
     }
   },
   extraReducers: (builder) => {
