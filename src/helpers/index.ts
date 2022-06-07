@@ -1,2 +1,2 @@
-export * from './getCountries'
-export * from './formatNumber'
+export * from './getCountries';
+export * from './formatNumber';

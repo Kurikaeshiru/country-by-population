@@ -33,5 +33,12 @@ export const getCountryExtremumCategories = (countries: Country[]) => {
   };
 };
 
-export const getShortListCountries = (countries: Country[], lastLetter: string) =>
-  countries.filter((country) => country.country < lastLetter || country.country.startsWith(lastLetter));
+export const getShortListCountries = (countries: Country[], lastLetter: string) => {
+  const lowerLastLetter = lastLetter.toLowerCase();
+
+  return countries.filter((country) => {
+    const lowerCountry = country.country.toLowerCase();
+
+    return lowerCountry < lowerLastLetter || lowerCountry.startsWith(lowerLastLetter);
+  });
+};

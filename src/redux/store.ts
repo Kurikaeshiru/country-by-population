@@ -1,13 +1,14 @@
 import { configureStore, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import thunkMiddleware from 'redux-thunk';
+
 import { Country } from '../types';
 import { getShortListCountries } from '../helpers/getCountries';
 
 export enum Status { loading, idle };
 
-const CUSTOM_COUTRIES = 'customCountries'
+const CUSTOM_COUTRIES = 'customCountries';
 
-const customCountriesData = localStorage.getItem(CUSTOM_COUTRIES)
+const customCountriesData = localStorage.getItem(CUSTOM_COUTRIES);
 
 export interface IState {
   status: Status
@@ -24,7 +25,7 @@ const initialState: IState = {
 
 export const actionTypes = {
   GET_COUNTRIES: 'APP/COUNTRIES/GET_COUNTRIES',
-}
+};
 
 export const getCountries = createAsyncThunk(
   actionTypes.GET_COUNTRIES,
@@ -36,10 +37,9 @@ export const getCountries = createAsyncThunk(
       return getShortListCountries(data as Country[], lastLetter);
     }
 
-
     return data as Country[];
   }
-)
+);
 
 export const countriesSlice = createSlice({
   name: 'countries',
@@ -47,24 +47,24 @@ export const countriesSlice = createSlice({
   reducers: {
     setCountries: (state, { payload }) => { state.allCountries = payload },
     addCountry: (state, { payload }) => {
-      const customCountries = [...state.custom, payload]
+      const customCountries = [...state.custom, payload];
 
-      localStorage.setItem(CUSTOM_COUTRIES, JSON.stringify(customCountries))
+      localStorage.setItem(CUSTOM_COUTRIES, JSON.stringify(customCountries));
 
-      state.custom = customCountries
+      state.custom = customCountries;
     }
   },
   extraReducers: (builder) => {
     builder.addCase(getCountries.pending, (state) => {
-      state.status = Status.loading
+      state.status = Status.loading;
     });
     builder.addCase(getCountries.fulfilled, (state, { payload }) => {
-      state.allCountries = payload
+      state.allCountries = payload;
 
-      state.status = Status.idle
+      state.status = Status.idle;
     });
   }
-})
+});
 
 // actions
 export const { setCountries, addCountry } = countriesSlice.actions

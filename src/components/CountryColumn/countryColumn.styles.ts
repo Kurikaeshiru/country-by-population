@@ -1,4 +1,6 @@
-import { stylesheet } from "typestyle";
+import { stylesheet } from 'typestyle';
+
+import { colors } from '../../app.styles';
 
 export const styles = stylesheet({
   country: {
@@ -6,14 +8,14 @@ export const styles = stylesheet({
     borderRadius: '8px',
     '$nest': {
       '&:hover': {
-        backgroundColor: '#c4e5ef',
+        backgroundColor: colors.acentColorLight,
       }
     }
   },
   total: {
     marginTop: 8,
     paddingTop: 8,
-    borderTop: '1px solid #eee',
+    borderTop: `1px solid ${colors.grey}`,
   },
   collapsible: {
     width: '100%',
@@ -25,7 +27,7 @@ export const styles = stylesheet({
     width: '100%',
     paddingBottom: '10px',
     marginBottom: '10px',
-    borderBottom: '1px solid rgba(87, 64, 246, 0.4)',
+    borderBottom: `1px solid ${colors.grey}`,
     cursor: 'pointer',
     '$nest': {
       '&::after': {
@@ -38,7 +40,7 @@ export const styles = stylesheet({
         transition: 'transform 300ms',
       },
       '&:hover': {
-        borderBottom: '1px solid rgb(87 64 246)'
+        borderBottom: `1px solid ${colors.acentColorLight}`
       }
     }
   },
@@ -49,4 +51,4 @@ export const styles = stylesheet({
       }
     }
   }
-})
+});

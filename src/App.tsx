@@ -8,7 +8,7 @@ import { Loader } from './components/Loader';
 import { formatNumber } from './helpers/formatNumber';
 import { extremumCountries, totalPopulation } from './redux/selectors';
 
-import { styles } from './app.styles'
+import { styles } from './app.styles';
 import { AnyAction } from 'redux';
 
 const LAST_LETTER = 'N';
@@ -37,7 +37,7 @@ function App() {
         <>
         <div className={`${styles.header} ${styles.row}`}>
           <span>Total population: {formatNumber(total)}</span>
-          <button onClick={getMoreHandler} disabled={allCountriesLoaded}>Get more countries</button>
+          <button className={styles.button} onClick={getMoreHandler} disabled={allCountriesLoaded}>Get more countries</button>
         </div>
           <div className={styles.content}>
             <CountryColumn data={biggest} title="The 10 biggest countries"/>

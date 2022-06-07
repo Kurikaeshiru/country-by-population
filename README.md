@@ -1,7 +1,14 @@
 # Test App
 
 This application displays population of the biggest and smallest countries.
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Due to requerements of using npx this project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+Additional dependencies:
+- typescript
+- typestyle (easy to use, zero performance impact plus type safe css)
+- react-collapsible (due to requerement to use open source library component for collapsible functionality)
+
+Custom countries are being kept in local storage and will be added to the initial state on page reload.
 
 ## Available Scripts
 

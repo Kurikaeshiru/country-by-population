@@ -7,7 +7,7 @@ import { styles } from './countryColumn.styles';
 import { styles as appStyles } from '../../app.styles';
 
 const CountryRow = ({ title, number }: { title: string, number: number }) => (
-  <div className={`${styles.country} ${appStyles.row}`}>
+  <div className={`${appStyles.row} ${styles.country}`}>
     <span>{title}</span>
     <span>{formatNumber(number)}</span>
   </div>
