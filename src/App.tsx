@@ -28,7 +28,7 @@ function App() {
   const getMoreHandler = () => {
     dispatch(getCountries() as {} as AnyAction);
     setAllCountriesLoaded(true);
-  }
+  };
 
   return (
     <div>

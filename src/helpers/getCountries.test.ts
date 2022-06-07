@@ -61,5 +61,5 @@ test('get shorter list countries to letter "n"', () => {
     { country: 'e', population: 1000 },
     { country: 'f', population: 2 },
     { country: 'n', population: 20 },
-  ])
+  ]);
 });
